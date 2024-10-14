@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  www:
+    build: docker
+    container_name: we_movies
+    restart: always
+    ports:
+      - "8000:80"
+    volumes:
+      - ./docker/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www/we_movies
+    networks:
+      - dev
+
+networks:
+  dev:

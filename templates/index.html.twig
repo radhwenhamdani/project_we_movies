@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}Accueil - We Movies{% endblock %}
+{% block body %}
+    <div class="col-lg-9">
+        {% for movie in movies.getCurrentPageResults()  %}
+            <div class="card mb-3">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <img src="https://image.tmdb.org/t/p/w500{{ movie.poster_path }}" class="img-fluid rounded-start" alt="img">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-start align-items-start">
+                                <h5 class="card-title">{{ movie.title }}</h5>
+                                <div class="rating" style="--rating: {{ movie.vote_average / 2 }};"></div>
+                                <span class="mb-1 ml-2 text-muted rating-movie">({{ movie.vote_count }} votes)</span>
+                            </div>
+                            <p class="card-text">
+                                <small class="text-muted">{{ movie.release_date|date("Y") }}</small>
+                            </p>
+                            <p class="card-text">{{ movie.overview | slice(0, 100) }}...</p>
+                        </div>
+                    </div>
+                    <div class="col-md-2 d-flex align-items-end mb-2">
+                        <button type="button" class="btn btn-primary btn-sm detail-movie" data-id="{{ movie.id }}" data-title="{{ movie.title }}" data-voteavg="{{ movie.vote_average }}" data-votecount="{{ movie.vote_count }}" data-bs-toggle="modal" data-bs-target=".modal-video">Lire les détails</button>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        <div class="d-flex justify-content-center align-items-center">
+            {{ pagerfanta(movies) }}
+        </div>
+    </div>
+
+{% endblock %}
