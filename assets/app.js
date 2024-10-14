@@ -8,12 +8,12 @@
 // any CSS you import will output into a single css file (app.css in this case)
 import './styles/app.css';
 
-function playYouTubeVideo() {
+$(document).on('click', '#play-button', function () {
     document.getElementById('poster-img').style.display = 'none';
     document.getElementById('play-button').style.display = 'none';
     document.getElementById('youtube-video').style.display = 'block';
     document.getElementById("video-iframe").src += "&autoplay=1";
-}
+});
 
 $(document).on('click', '.detail-movie', function () {
     let id = $(this).attr('data-id');
